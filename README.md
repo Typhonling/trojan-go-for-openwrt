@@ -9,8 +9,8 @@ cd openwrt-sdk
 # 获取源码
 git clone https://github.com/Typhonling/trojan-go-for-openwrt.git package/trojan-go-for-openwrt
 
-# 选中 Network -> chinadns-ng
+# 选中 Network -> trojan-go-for-openwrt
 make menuconfig
 
-# 编译 chinadns-ng
+# 编译 trojan-go-for-openwrt
 make package/trojan-go-for-openwrt/{clean,compile} V=s
