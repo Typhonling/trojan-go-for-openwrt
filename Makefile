@@ -5,14 +5,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=trojan-go
-PKG_VERSION:=0.10.2
+PKG_VERSION:=0.10.6
 PKG_RELEASE:=$(SUBTARGET)
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/frainzy1477/trojan-go.git
+PKG_SOURCE_URL:=https://github.com/p4gefau1t/trojan-go.git
 PKG_MIRROR_HASH:=skip
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=33f3fd564fcced4845fbb39083fb9b9882bf8b11
+PKG_SOURCE_VERSION:=2dc60f52e79ff8b910e78e444f1e80678e936450
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 PKG_CONFIG_DEPENDS:= \
@@ -23,10 +23,10 @@ PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
 PKG_USE_MIPS16:=0
 
-GO_PKG:=github.com/frainzy1477/trojan-go
+GO_PKG:=github.com/p4gefau1t/trojan-go
 GO_PKG_BUILD_PKG:=$$(GO_PKG)
 
-GO_PKG_TAGS:=full
+GO_PKG_TAGS:=client
 GO_PKG_LDFLAGS:=-s -w
 GO_PKG_LDFLAGS_X:= \
 	$(GO_PKG)/constant.Version=v$(PKG_VERSION) \
@@ -79,14 +79,14 @@ endif
 define Build/Compile
 	$(call GoPackage/Build/Compile)
 ifeq ($(CONFIG_TROJAN_GO_COMPRESS_UPX),y)
-	wget -q https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz -O $(DL_DIR)/upx-3.96.tar.xz
+	wget -q https://github.com/upx/upx/releases/download/v4.0.2/upx-4.0.2-amd64_linux.tar.xz -O $(DL_DIR)/upx.tar.xz
 	rm -rf $(BUILD_DIR)/upx
 	mkdir -p $(BUILD_DIR)/upx
-	xz -d -c $(DL_DIR)/upx-3.96.tar.xz | tar -x -C $(BUILD_DIR)/upx
-	chmod +x $(BUILD_DIR)/upx/upx-3.96-amd64_linux/upx
+	xz -d -c $(DL_DIR)/upx.tar.xz | tar -x -C $(BUILD_DIR)/upx
+	chmod +x $(BUILD_DIR)/upx/upx-4.0.2-amd64_linux/upx
 	$(BUILD_DIR)/upx/upx-3.96-amd64_linux/upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/$(PKG_NAME)
-	wget -q https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/$(GEOIP_VER)/$(GEOIP_FILE)  -O 2>&1 >1 $(GO_PKG_BUILD_BIN_DIR)/$(GEOIP_FILE)
-	wget -q https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/$(GEOSITE_VER)/$(GEOSITE_FILE)  -O 2>&1 >1 $(GO_PKG_BUILD_BIN_DIR)/$(GEOSITE_FILE)
+#	wget -q https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/$(GEOIP_VER)/$(GEOIP_FILE)  -O 2>&1 >1 $(GO_PKG_BUILD_BIN_DIR)/$(GEOIP_FILE)
+#	wget -q https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/$(GEOSITE_VER)/$(GEOSITE_FILE)  -O 2>&1 >1 $(GO_PKG_BUILD_BIN_DIR)/$(GEOSITE_FILE)
 endif
 endef
 
