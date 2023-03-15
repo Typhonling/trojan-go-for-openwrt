@@ -84,7 +84,7 @@ ifeq ($(CONFIG_TROJAN_GO_COMPRESS_UPX),y)
 	mkdir -p $(BUILD_DIR)/upx
 	xz -d -c $(DL_DIR)/upx.tar.xz | tar -x -C $(BUILD_DIR)/upx
 	chmod +x $(BUILD_DIR)/upx/upx-4.0.2-amd64_linux/upx
-	$(BUILD_DIR)/upx/upx-3.96-amd64_linux/upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/$(PKG_NAME)
+	$(BUILD_DIR)/upx/upx-4.0.2-amd64_linux/upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/$(PKG_NAME)
 #	wget -q https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/$(GEOIP_VER)/$(GEOIP_FILE)  -O 2>&1 >1 $(GO_PKG_BUILD_BIN_DIR)/$(GEOIP_FILE)
 #	wget -q https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/$(GEOSITE_VER)/$(GEOSITE_FILE)  -O 2>&1 >1 $(GO_PKG_BUILD_BIN_DIR)/$(GEOSITE_FILE)
 endif
