@@ -37,8 +37,8 @@ include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
 
 
 define Package/$(PKG_NAME)
-	SECTION:=luci
-	CATEGORY:=LuCI
+	SECTION:=net
+	CATEGORY:=Network
 	SUBMENU:=2. Trojan
 	DEPENDS:=$$(GO_ARCH_DEPENDS)
 	TITLE:=Trojan-go.
